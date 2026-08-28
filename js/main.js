@@ -204,10 +204,29 @@ function initWhatsAppWidget(config) {
  * Opens WhatsApp Chat with specified text message
  */
 function sendWhatsAppMessage(phoneNumber, message) {
-  const cleanPhone = phoneNumber.replace(/[^0-9]/g, '');
-  const encodedMsg = encodeURIComponent(message);
-  const waUrl = `https://wa.me/${cleanPhone}?text=${encodedMsg}`;
-  window.open(waUrl, '_blank', 'noopener,noreferrer');
+  let cleanPhone = String(phoneNumber || '').replace(/[^0-9]/g, '');
+
+  // If still dummy placeholder, alert the user gently
+  if (!cleanPhone || cleanPhone === '15551234567') {
+    showToast('⚠️ Notice: Replace dummy WhatsApp number in js/config.js with your real number!');
+  }
+
+  const encodedMsg = encodeURIComponent(message || '');
+  const waUrl = `https://api.whatsapp.com/send?phone=${cleanPhone}&text=${encodedMsg}`;
+
+  try {
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    if (isMobile) {
+      window.location.href = waUrl;
+    } else {
+      const win = window.open(waUrl, '_blank', 'noopener,noreferrer');
+      if (!win || win.closed || typeof win.closed === 'undefined') {
+        window.location.href = waUrl;
+      }
+    }
+  } catch (err) {
+    window.location.href = waUrl;
+  }
 }
 
 /**
