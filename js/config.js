@@ -14,10 +14,9 @@ const SITE_CONFIG = {
   
   // Contact Details
   // IMPORTANT: For WhatsApp, enter the phone number with country code (NO '+' or spaces or dashes)
-  // Example: 919876543210 for India (+91), 15551234567 for USA (+1), 447123456789 for UK (+44)
   whatsapp: {
-    phoneNumber: "15551234567", // <-- Replace with your real WhatsApp Number (with country code, digits only)
-    displayNumber: "+1 (555) 123-4567",
+    phoneNumber: "918921540983", // Real WhatsApp Number with Country Code (91)
+    displayNumber: "+91 89215 40983",
     agentName: "Nexora Support Team",
     agentRole: "Customer Success & Consultation",
     welcomeMessage: "Hello! 👋 Welcome to Nexora Technologies. How can we assist you today?",
@@ -29,9 +28,9 @@ const SITE_CONFIG = {
   contact: {
     email: "contact@nexoratech.com",
     supportEmail: "support@nexoratech.com",
-    phone: "+1 (555) 123-4567",
+    phone: "+91 89215 40983",
     address: "742 Evergreen Terrace, Suite 500, Tech City, CA 94016",
-    workingHours: "Mon - Fri: 9:00 AM - 6:00 PM (EST)",
+    workingHours: "Mon - Fri: 9:00 AM - 6:00 PM (IST)",
     googleMapsUrl: "https://maps.google.com"
   },
 
