@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nexora Health | Patient Care, Surgical Assistance & Coordination</title>
+  <!-- Font Awesome CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+  <style>
+    /* Hero Section specific styles */
+    .hero {
+      padding: 8rem 2rem 6rem;
+      text-align: center;
+      position: relative;
+    }
+    .hero h1 {
+      font-size: 3.5rem;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(135deg, var(--text-primary) 20%, var(--accent-secondary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero p {
+      font-size: 1.25rem;
+      color: var(--text-secondary);
+      max-width: 700px;
+      margin: 0 auto 2.5rem;
+    }
+    .hero-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    /* Specialty layout */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    .service-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-glass);
+      border-radius: var(--radius-md);
+      padding: 2rem;
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+    .service-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--accent-secondary);
+      box-shadow: var(--shadow-glow);
+    }
+    .service-icon {
+      font-size: 2.5rem;
+      color: var(--accent-secondary);
+      margin-bottom: 1.5rem;
+    }
+    .service-card h3 {
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+    }
+    .service-card ul {
+      list-style: none;
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      margin-top: auto;
+    }
+    .service-card ul li {
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .service-card ul li i {
+      color: var(--accent-primary);
+      font-size: 0.8rem;
+    }
+
+    /* Why Choose Us styles */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+    .feature-item {
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
+      background: rgba(255, 255, 255, 0.02);
+      padding: 1.5rem;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-glass);
+    }
+    .feature-item i {
+      font-size: 1.8rem;
+      color: var(--accent-secondary);
+      background: var(--bg-secondary);
+      padding: 0.75rem;
+      border-radius: 50%;
+    }
+    .feature-content h4 {
+      font-size: 1.15rem;
+      margin-bottom: 0.5rem;
+    }
+    .feature-content p {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="nav-container">
+      <a href="/index.html" class="logo">
+        <i class="fa-solid fa-compass-drafting"></i> NEXORA HEALTH
+      </a>
+      <button class="menu-toggle" id="menu-toggle-btn">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+      <nav id="navbar">
+        <ul>
+          <li><a href="/index.html" class="active">About Us</a></li>
+          <li><a href="/doctors.html">Doctors</a></li>
+          <li><a href="/appointments.html">Book Appointment</a></li>
+          <li><a href="/contact.html">Contact Us</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>Patient Care, Surgical Assistance &<br><span style="color: var(--accent-secondary);">Healthcare Coordination</span></h1>
+    <p>Nexora Health coordinates your complete healthcare journey, connecting patients with leading surgical specialists, modern dental clinics, and trusted partner hospital networks.</p>
+    <div class="hero-buttons">
+      <a href="/appointments.html" class="btn btn-primary"><i class="fa-solid fa-calendar-check"></i> Book Consultation</a>
+      <a href="/doctors.html" class="btn btn-secondary"><i class="fa-solid fa-user-doctor"></i> View Our Doctors</a>
+    </div>
+  </section>
+
+  <!-- About Us Section -->
+  <section id="about" style="border-top: 1px solid var(--border-glass);">
+    <div class="glass-panel">
+      <div style="display: grid; grid-template-columns: 1fr 1.2fr; gap: 3rem; align-items: center;" class="grid-2">
+        <div>
+          <h2 style="font-size: 2.2rem; margin-bottom: 1.5rem; line-height: 1.2;">Empowering Your Journey To <span class="text-accent">Better Health</span></h2>
+          <div style="width: 60px; height: 4px; background: var(--accent-primary); margin-bottom: 1.5rem; border-radius: 2px;"></div>
+          <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">
+            Nexora Health is a premier healthcare coordination and patient support service helping individuals connect with trusted hospitals, experienced doctors, and advanced treatment solutions across multiple medical specialties.
+          </p>
+          <p style="color: var(--text-secondary);">
+            We provide professional guidance, consultation coordination, treatment assistance, and complete patient support throughout the healthcare journey. Our goal is to make quality healthcare access easier, safer, and more comfortable for patients.
+          </p>
+        </div>
+        <div style="position: relative;">
+          <!-- Custom Ambient image container using Unsplash medical coordinates -->
+          <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&q=80&w=600" alt="Hospital Management" style="width:100%; border-radius: var(--radius-md); border: 1px solid var(--border-glass); box-shadow: var(--shadow-glow);">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Treatments & Services Section -->
+  <section id="services">
+    <div class="section-header">
+      <h2>Treatments & Services</h2>
+      <p>Explore our coordinate clinics and surgical support specialties</p>
+    </div>
+    <div class="services-grid">
+      <!-- Cosmetic -->
+      <div class="service-card">
+        <div class="service-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+        <h3>Cosmetic & Aesthetic</h3>
+        <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1.5rem;">Advanced cosmetic procedures designed to build confidence under skilled plastic surgeon oversight.</p>
+        <ul>
+          <li><i class="fa-solid fa-chevron-right"></i> Gynecomastia Surgery</li>
+          <li><i class="fa-solid fa-chevron-right"></i> Liposuction</li>
+          <li><i class="fa-solid fa-chevron-right"></i> Rhinoplasty (Nose Surgery)</li>
+          <li><i class="fa-solid fa-chevron-right"></i> Skin & Scar Treatments</li>
+          <li><i class="fa-solid fa-chevron-right"></i> Cosmetic Procedures</li>
+        </ul>
+      </div>
+      <!-- Surgical -->
+      <div class="service-card">
+        <div class="service-icon"><i class="fa-solid fa-hospital-user"></i></div>
+        <h3>General Surgical Assistance</h3>
+        <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1.5rem;">Connecting you with top general surgeons for laparoscopy, hernia, and gallbladder procedures.</p>
+        <ul>
+          <li><i class="fa-solid fa-chevron-right"></i> Gallbladder Surgery</li>
+          <li><i class="fa-solid fa-chevron-right"></i> Hernia Treatment</li>
+          <li><i class="fa-solid fa-chevron-right"></i> Piles Treatment</li>
+          <li><i class="fa-solid fa-chevron-right"></i> Kidney Stone Procedures</li>
+          <li><i class="fa-solid fa-chevron-right"></i> Laparoscopic Surgeries</li>
+        </ul>
+      </div>
+      <!-- Orthopedic -->
+      <div class="service-card">
+        <div class="service-icon"><i class="fa-solid fa-bone"></i></div>
+        <h3>Orthopedic & Spine Care</h3>
+        <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1.5rem;">Complete joint pain therapy, shoulder repair, and spine surgery coordination support.</p>
+        <ul>
+          <li><i class="fa-solid fa-chevron-right"></i> Joint Pain Consultation</li>
+          <li><i class="fa-solid fa-chevron-right"></i> Knee & Shoulder Treatments</li>
+          <li><i class="fa-solid fa-chevron-right"></i> Spine Care Support</li>
+          <li><i class="fa-solid fa-chevron-right"></i> Orthopedic Surgery Assistance</li>
+        </ul>
+      </div>
+      <!-- Dental -->
+      <div class="service-card">
+        <div class="service-icon"><i class="fa-solid fa-tooth"></i></div>
+        <h3>Dental & Smile Care</h3>
+        <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1.5rem;">State-of-the-art dental clinic matchmaking for implant dentistry and smile designing.</p>
+        <ul>
+          <li><i class="fa-solid fa-chevron-right"></i> Smile Designing</li>
+          <li><i class="fa-solid fa-chevron-right"></i> Dental Implants</li>
+          <li><i class="fa-solid fa-chevron-right"></i> Cosmetic Dentistry</li>
+          <li><i class="fa-solid fa-chevron-right"></i> Complete Dental Treatments</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Patient Coordination Services -->
+  <section id="coordination" style="background: rgba(28, 37, 65, 0.3); max-width: 100%; border-top: 1px solid var(--border-glass); border-bottom: 1px solid var(--border-glass);">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
+      <div class="section-header">
+        <h2>End-to-End Coordination</h2>
+        <p>Our operational services ensure a stress-free care pathway</p>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem;">
+        <div class="glass-panel" style="padding: 1.5rem; text-align: center;">
+          <i class="fa-solid fa-user-doctor text-accent" style="font-size: 2rem; margin-bottom: 1rem;"></i>
+          <h4>Doctor Consultations</h4>
+          <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.5rem;">Scheduling priority appointments with senior medical specialists.</p>
+        </div>
+        <div class="glass-panel" style="padding: 1.5rem; text-align: center;">
+          <i class="fa-solid fa-hotel text-accent" style="font-size: 2rem; margin-bottom: 1rem;"></i>
+          <h4>Hospital Admission</h4>
+          <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.5rem;">Pre-booking slots, coordinating paperwork, and room arrangements.</p>
+        </div>
+        <div class="glass-panel" style="padding: 1.5rem; text-align: center;">
+          <i class="fa-solid fa-car-side text-accent" style="font-size: 2rem; margin-bottom: 1rem;"></i>
+          <h4>Travel & Stay Support</h4>
+          <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.5rem;">Travel guidance and comfortable stay logistics for out-station patients.</p>
+        </div>
+        <div class="glass-panel" style="padding: 1.5rem; text-align: center;">
+          <i class="fa-solid fa-heart-pulse text-accent" style="font-size: 2rem; margin-bottom: 1rem;"></i>
+          <h4>Post-Treatment Care</h4>
+          <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.5rem;">Coordinating post-op follow-ups and therapist sessions.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Choose Us -->
+  <section id="why-choose">
+    <div class="section-header">
+      <h2>Why Choose Nexora Health?</h2>
+      <p>We place patient comfort and professional care at the center of our coordination services</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-item">
+        <i class="fa-solid fa-shield-halved"></i>
+        <div class="feature-content">
+          <h4>Trusted Hospital Network</h4>
+          <p>We work exclusively with accredited hospitals maintaining state-of-the-art operating theatres.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <i class="fa-solid fa-user-check"></i>
+        <div class="feature-content">
+          <h4>Personalized Patient Support</h4>
+          <p>Dedicated personal coordinators to guide you through admission and billing cycles.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <i class="fa-solid fa-lock"></i>
+        <div class="feature-content">
+          <h4>Confidential & Friendly</h4>
+          <p>Strict patient privacy policies ensuring medical reports remain encrypted and secure.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <i class="fa-solid fa-bolt"></i>
+        <div class="feature-content">
+          <h4>Fast Response & Help</h4>
+          <p>Rapid booking confirmations and instant patient helpline queries via WhatsApp integration.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h3 class="logo"><i class="fa-solid fa-compass-drafting"></i> NEXORA</h3>
+        <p>Providing guidance, hospital coordination, and treatment planning support for cosmetic, general surgical, orthopedic, and dental procedures.</p>
+        <div class="social-links">
+          <a href="#" class="social-icon"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" class="social-icon"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" class="social-icon"><i class="fa-brands fa-whatsapp"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h3>Services</h3>
+        <ul class="footer-links">
+          <li><a href="/doctors.html">Aesthetic Care</a></li>
+          <li><a href="/doctors.html">General Surgeries</a></li>
+          <li><a href="/doctors.html">Joint & Spine Care</a></li>
+          <li><a href="/doctors.html">Dental Designs</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>Support</h3>
+        <ul class="footer-links">
+          <li><a href="/appointments.html">Book Slot</a></li>
+          <li><a href="/contact.html">Lead Enquiry</a></li>
+          <li><a href="#" id="staff-link">Staff Access</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>Contact Info</h3>
+        <p><i class="fa-solid fa-location-dot text-accent"></i> 12/A Hospital Ave, Medical District</p>
+        <p><i class="fa-solid fa-phone text-accent"></i> +1 555-010-0100</p>
+        <p><i class="fa-solid fa-envelope text-accent"></i> contact@nexorahealth.com</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2026 Nexora Health. All rights reserved. Professional Coordination Services.
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script type="module">
+    import { checkSession, updateNavAuthLinks, openLoginModal } from '/js/auth.js';
+
+    document.addEventListener('DOMContentLoaded', async () => {
+      // Toggle Mobile Menu
+      const toggleBtn = document.getElementById('menu-toggle-btn');
+      const navbar = document.getElementById('navbar');
+      toggleBtn.addEventListener('click', () => {
+        navbar.classList.toggle('active');
+      });
+
+      // Update Nav auth controls
+      const user = await checkSession();
+      updateNavAuthLinks(user);
+
+      // Support footer staff link
+      document.getElementById('staff-link').addEventListener('click', (e) => {
+        e.preventDefault();
+        if (user) {
+          window.location.href = '/dashboard.html';
+        } else {
+          openLoginModal();
+        }
+      });
+
+      // Check if URL parameters have login requests
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get('login') === 'true' && !user) {
+        openLoginModal();
+      }
+    });
+  </script>
+</body>
+</html>

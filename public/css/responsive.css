@@ -1,0 +1,100 @@
+/* Tablet Breakpoint */
+@media (max-width: 1024px) {
+  section {
+    padding: 4rem 1.5rem;
+  }
+  
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+}
+
+/* Mobile Breakpoint */
+@media (max-width: 768px) {
+  .section-header h2 {
+    font-size: 2rem;
+  }
+  
+  /* Navigation Menu Toggle */
+  .menu-toggle {
+    display: block;
+  }
+  
+  nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: var(--bg-primary);
+    border-bottom: 1px solid var(--border-glass);
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-out;
+  }
+  
+  nav.active {
+    max-height: 400px;
+    padding: 1.5rem 0;
+  }
+  
+  nav ul {
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 0 2rem;
+    align-items: flex-start;
+  }
+  
+  nav ul li {
+    width: 100%;
+  }
+  
+  nav ul li a {
+    display: block;
+    width: 100%;
+    font-size: 1.1rem;
+  }
+  
+  .nav-btn {
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+  
+  /* Footer Layout collapsing */
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    text-align: center;
+  }
+  
+  .social-links {
+    justify-content: center;
+  }
+  
+  /* Tables wrapper for horizontal scrolling on mobile */
+  .table-responsive {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border: 1px solid var(--border-glass);
+    border-radius: var(--radius-sm);
+    margin-bottom: 1.5rem;
+  }
+  
+  .table-responsive table {
+    width: 100%;
+    min-width: 600px; /* Forces scrolling instead of squishing columns */
+  }
+  
+  /* Card layouts collapse to single column */
+  .grid-2, .grid-3, .grid-4 {
+    grid-template-columns: 1fr !important;
+  }
+  
+  /* Glass panels padding reduction */
+  .glass-panel {
+    padding: 1.5rem;
+  }
+}

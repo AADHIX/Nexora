@@ -1,0 +1,8 @@
+# Robots.txt for Nexora Technologies
+# Search Engine Crawlers Directives
+
+User-agent: *
+Allow: /
+
+# Direct Google and other search engine bots to your XML Sitemap
+Sitemap: https://aadhix.github.io/Nexora/sitemap.xml

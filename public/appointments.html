@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scheduling & Registration | Nexora Health Hub</title>
+  <!-- Font Awesome CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+  <style>
+    .scheduling-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+    .scheduling-tab-btn {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-glass);
+      color: var(--text-secondary);
+      padding: 0.8rem 1.8rem;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .scheduling-tab-btn.active {
+      background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+      color: white;
+      border-color: transparent;
+      box-shadow: var(--shadow-glow);
+    }
+    .scheduling-tab-btn:hover:not(.active) {
+      border-color: var(--accent-secondary);
+      color: var(--text-primary);
+    }
+    .form-section {
+      display: none;
+    }
+    .form-section.active {
+      display: block;
+      animation: fadeIn 0.4s ease-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .grid-form-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+    @media (max-width: 768px) {
+      .grid-form-2 {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="nav-container">
+      <a href="/index.html" class="logo">
+        <i class="fa-solid fa-compass-drafting"></i> NEXORA HEALTH
+      </a>
+      <button class="menu-toggle" id="menu-toggle-btn">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+      <nav id="navbar">
+        <ul>
+          <li><a href="/index.html">About Us</a></li>
+          <li><a href="/doctors.html">Doctors</a></li>
+          <li><a href="/appointments.html" class="active">Book Appointment</a></li>
+          <li><a href="/contact.html">Contact Us</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Section -->
+  <section style="min-height: 80vh;">
+    <div class="section-header">
+      <h2>Care Scheduling & Intake Onboarding</h2>
+      <p>Secure an appointment time slot or register your comprehensive health records with our support network</p>
+    </div>
+
+    <!-- Sub Navigation Tabs -->
+    <div class="scheduling-tabs">
+      <button class="scheduling-tab-btn active" data-target="booking-sec"><i class="fa-solid fa-calendar-check"></i> Book Consultation</button>
+      <button class="scheduling-tab-btn" data-target="intake-sec"><i class="fa-solid fa-file-medical"></i> Patient Registration</button>
+    </div>
+
+    <!-- Segment 1: Appointment Booking Form -->
+    <div class="form-section active" id="booking-sec">
+      <div class="glass-panel" style="max-width: 650px; margin: 0 auto;">
+        <h3 style="margin-bottom: 1.5rem; text-align: center; border-bottom: 1px solid var(--border-glass); padding-bottom: 1rem;"><i class="fa-solid fa-calendar-days text-accent"></i> Securing Consultation Slot</h3>
+        
+        <form id="appointment-booking-form">
+          <div class="form-group">
+            <label for="doctorId">Select Doctor Specialty</label>
+            <select id="doctorId" class="form-control" required>
+              <option value="">Choose doctor specialty...</option>
+            </select>
+            <div class="form-error" id="doctorId-error"></div>
+          </div>
+
+          <div class="grid-form-2">
+            <div class="form-group">
+              <label for="date">Consultation Date</label>
+              <input type="date" id="date" class="form-control" required>
+              <div class="form-error" id="date-error"></div>
+            </div>
+            
+            <div class="form-group">
+              <label for="timeSlot">Available Time Slot</label>
+              <div style="position: relative;">
+                <select id="timeSlot" class="form-control" required>
+                  <option value="">Select doctor & date first</option>
+                </select>
+                <!-- Loading indicator inside slot field -->
+                <i class="fa-solid fa-circle-notch fa-spin" id="slots-loading" style="position: absolute; right: 2rem; top: 35%; color: var(--accent-secondary); display: none;"></i>
+              </div>
+              <div class="form-error" id="timeSlot-error"></div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="patientName">Patient Name</label>
+            <input type="text" id="patientName" class="form-control" placeholder="e.g. John Doe" required>
+            <div class="form-error" id="patientName-error"></div>
+          </div>
+
+          <div class="grid-form-2">
+            <div class="form-group">
+              <label for="patientPhone">Contact Phone Number</label>
+              <input type="tel" id="patientPhone" class="form-control" placeholder="+15551234567" required>
+              <div class="form-error" id="patientPhone-error"></div>
+            </div>
+            <div class="form-group">
+              <label for="patientEmail">Email Address</label>
+              <input type="email" id="patientEmail" class="form-control" placeholder="john.doe@example.com" required>
+              <div class="form-error" id="patientEmail-error"></div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="notes">Clinical Concerns / Consultation Notes (Optional)</label>
+            <textarea id="notes" class="form-control" rows="3" placeholder="Briefly describe reasons for scheduling the consultation..."></textarea>
+            <div class="form-error" id="notes-error"></div>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;" disabled>Book Appointment</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Segment 2: Patient Registration Intake Onboarding Form -->
+    <div class="form-section" id="intake-sec">
+      <div class="glass-panel" style="max-width: 800px; margin: 0 auto;">
+        <h3 style="margin-bottom: 1.5rem; text-align: center; border-bottom: 1px solid var(--border-glass); padding-bottom: 1rem;"><i class="fa-solid fa-id-card-clip text-accent"></i> Patient Intake Onboarding</h3>
+        
+        <form id="patient-register-form">
+          <div class="grid-form-2">
+            <div class="form-group">
+              <label for="firstName">First Name</label>
+              <input type="text" id="firstName" class="form-control" placeholder="John" required>
+              <div class="form-error" id="firstName-error"></div>
+            </div>
+            <div class="form-group">
+              <label for="lastName">Last Name</label>
+              <input type="text" id="lastName" class="form-control" placeholder="Doe" required>
+              <div class="form-error" id="lastName-error"></div>
+            </div>
+          </div>
+
+          <div class="grid-form-2">
+            <div class="form-group">
+              <label for="dob">Date of Birth</label>
+              <input type="date" id="dob" class="form-control" required>
+              <div class="form-error" id="dob-error"></div>
+            </div>
+            <div class="form-group">
+              <label for="gender">Gender Identity</label>
+              <select id="gender" class="form-control" required>
+                <option value="">Select gender...</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+              </select>
+              <div class="form-error" id="gender-error"></div>
+            </div>
+          </div>
+
+          <div class="grid-form-2">
+            <div class="form-group">
+              <label for="phone">Phone Number</label>
+              <input type="tel" id="phone" class="form-control" placeholder="+15551234567" required>
+              <div class="form-error" id="phone-error"></div>
+            </div>
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" class="form-control" placeholder="john.doe@example.com" required>
+              <div class="form-error" id="email-error"></div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="address">Residential Address</label>
+            <input type="text" id="address" class="form-control" placeholder="123 Care Street, Medical District" required>
+            <div class="form-error" id="address-error"></div>
+          </div>
+
+          <div class="grid-form-2">
+            <div class="form-group">
+              <label for="bloodGroup">Blood Group</label>
+              <select id="bloodGroup" class="form-control" required>
+                <option value="">Select blood type...</option>
+                <option value="A+">A+</option>
+                <option value="A-">A-</option>
+                <option value="B+">B+</option>
+                <option value="B-">B-</option>
+                <option value="AB+">AB+</option>
+                <option value="AB-">AB-</option>
+                <option value="O+">O+</option>
+                <option value="O-">O-</option>
+              </select>
+              <div class="form-error" id="bloodGroup-error"></div>
+            </div>
+            <div class="form-group">
+              <label for="primaryDoctor">Assigned Care Doctor</label>
+              <select id="primaryDoctor" class="form-control" required>
+                <option value="">Choose coordinating doctor...</option>
+              </select>
+              <div class="form-error" id="primaryDoctor-error"></div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="knownAllergies">Known Allergies (Optional)</label>
+            <input type="text" id="knownAllergies" class="form-control" placeholder="e.g. Penicillin, Pollen (or leave blank if None)">
+            <div class="form-error" id="knownAllergies-error"></div>
+          </div>
+
+          <div class="form-group">
+            <label for="symptoms">Symptoms / Primary Clinical Concern</label>
+            <textarea id="symptoms" class="form-control" rows="3" placeholder="Describe symptoms or reasons for coordinating care with Nexora Health..." required></textarea>
+            <div class="form-error" id="symptoms-error"></div>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;" disabled>Submit Registration</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h3 class="logo"><i class="fa-solid fa-compass-drafting"></i> NEXORA</h3>
+        <p>Providing guidance, hospital coordination, and treatment planning support for cosmetic, general surgical, orthopedic, and dental procedures.</p>
+        <div class="social-links">
+          <a href="#" class="social-icon"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" class="social-icon"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" class="social-icon"><i class="fa-brands fa-whatsapp"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h3>Services</h3>
+        <ul class="footer-links">
+          <li><a href="/doctors.html">Aesthetic Care</a></li>
+          <li><a href="/doctors.html">General Surgeries</a></li>
+          <li><a href="/doctors.html">Joint & Spine Care</a></li>
+          <li><a href="/doctors.html">Dental Designs</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>Support</h3>
+        <ul class="footer-links">
+          <li><a href="/appointments.html">Book Slot</a></li>
+          <li><a href="/contact.html">Lead Enquiry</a></li>
+          <li><a href="#" id="staff-link">Staff Access</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>Contact Info</h3>
+        <p><i class="fa-solid fa-location-dot text-accent"></i> 12/A Hospital Ave, Medical District</p>
+        <p><i class="fa-solid fa-phone text-accent"></i> +1 555-010-0100</p>
+        <p><i class="fa-solid fa-envelope text-accent"></i> contact@nexorahealth.com</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2026 Nexora Health. All rights reserved. Professional Coordination Services.
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script type="module" src="/js/appointmentForm.js"></script>
+  <script type="module" src="/js/patientForm.js"></script>
+  <script type="module">
+    import { checkSession, updateNavAuthLinks, openLoginModal } from '/js/auth.js';
+
+    document.addEventListener('DOMContentLoaded', async () => {
+      // Toggle Mobile Menu
+      const toggleBtn = document.getElementById('menu-toggle-btn');
+      const navbar = document.getElementById('navbar');
+      toggleBtn.addEventListener('click', () => {
+        navbar.classList.toggle('active');
+      });
+
+      // Update Nav Dynamic Links
+      const user = await checkSession();
+      updateNavAuthLinks(user);
+
+      // Support footer staff link
+      document.getElementById('staff-link').addEventListener('click', (e) => {
+        e.preventDefault();
+        if (user) {
+          window.location.href = '/dashboard.html';
+        } else {
+          openLoginModal();
+        }
+      });
+
+      // Sub-tabs switches
+      const tabButtons = document.querySelectorAll('.scheduling-tab-btn');
+      const formSections = document.querySelectorAll('.form-section');
+
+      tabButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const target = btn.dataset.target;
+          
+          tabButtons.forEach(b => b.classList.remove('active'));
+          formSections.forEach(s => s.classList.remove('active'));
+
+          btn.classList.add('active');
+          document.getElementById(target).classList.add('active');
+        });
+      });
+
+      // Check URL parameters for tab selection overrides
+      const urlParams = new URLSearchParams(window.location.search);
+      const activeTab = urlParams.get('tab');
+      if (activeTab === 'intake') {
+        const intakeTabBtn = document.querySelector('[data-target="intake-sec"]');
+        intakeTabBtn?.click();
+      }
+    });
+  </script>
+</body>
+</html>

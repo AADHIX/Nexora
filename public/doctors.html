@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Doctors | Nexora Health Directory</title>
+  <!-- Font Awesome CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+  <style>
+    .directory-controls {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+    .doctors-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2.5rem;
+    }
+    .doctor-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-glass);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+    .doctor-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--accent-secondary);
+      box-shadow: var(--shadow-glow);
+    }
+    .doctor-photo-container {
+      position: relative;
+      height: 240px;
+      overflow: hidden;
+      background: #0f172a;
+    }
+    .doctor-photo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+    .doctor-card:hover .doctor-photo {
+      transform: scale(1.05);
+    }
+    .specialty-tag {
+      position: absolute;
+      bottom: 1rem;
+      left: 1rem;
+      background: rgba(13, 148, 136, 0.9);
+      color: white;
+      padding: 0.25rem 0.75rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      backdrop-filter: blur(4px);
+    }
+    .doctor-info {
+      padding: 1.5rem;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .doctor-info h3 {
+      font-size: 1.25rem;
+      margin-bottom: 0.25rem;
+      color: var(--text-primary);
+    }
+    .doctor-degrees {
+      font-size: 0.85rem;
+      color: var(--accent-secondary);
+      margin-bottom: 1rem;
+      font-weight: 500;
+    }
+    .doctor-schedule-box {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-glass);
+      border-radius: 6px;
+      padding: 0.75rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.85rem;
+    }
+    .doctor-schedule-box h4 {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.05em;
+    }
+    .schedule-day {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.25rem;
+      color: var(--text-secondary);
+    }
+    .doctor-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      margin-top: auto;
+    }
+    .doctor-actions .btn {
+      padding: 0.6rem 1rem;
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="nav-container">
+      <a href="/index.html" class="logo">
+        <i class="fa-solid fa-compass-drafting"></i> NEXORA HEALTH
+      </a>
+      <button class="menu-toggle" id="menu-toggle-btn">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+      <nav id="navbar">
+        <ul>
+          <li><a href="/index.html">About Us</a></li>
+          <li><a href="/doctors.html" class="active">Doctors</a></li>
+          <li><a href="/appointments.html">Book Appointment</a></li>
+          <li><a href="/contact.html">Contact Us</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Doctor Directory Section -->
+  <section>
+    <div class="section-header">
+      <h2>Doctors Directory</h2>
+      <p>Consult with our qualified healthcare coordinators and surgical specialists</p>
+    </div>
+
+    <!-- Search & Filter Controls -->
+    <div class="directory-controls glass-panel grid-2">
+      <div class="form-group" style="margin-bottom: 0;">
+        <label for="search-doctor">Search by Name</label>
+        <div style="position: relative;">
+          <input type="text" id="search-doctor" class="form-control" placeholder="Search e.g. Dr. Sarah Jenkins..." style="padding-left: 2.5rem;">
+          <i class="fa-solid fa-magnifying-glass" style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: var(--text-muted);"></i>
+        </div>
+      </div>
+      <div class="form-group" style="margin-bottom: 0;">
+        <label for="filter-specialty">Specialty Category</label>
+        <select id="filter-specialty" class="form-control">
+          <option value="">All Specialties</option>
+          <option value="Cosmetic & Aesthetic Treatments">Cosmetic & Aesthetic Treatments</option>
+          <option value="General Surgical Assistance">General Surgical Assistance</option>
+          <option value="Orthopedic & Spine Care">Orthopedic & Spine Care</option>
+          <option value="Dental & Smile Care">Dental & Smile Care</option>
+          <option value="Patient Coordination Services">Patient Coordination Services</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Doctors Display Grid -->
+    <div class="doctors-grid" id="doctors-container">
+      <div style="grid-column: 1/-1; text-align: center; color: var(--text-secondary); padding: 3rem 0;">
+        <i class="fa-solid fa-circle-notch fa-spin" style="font-size: 2.5rem; color: var(--accent-secondary); margin-bottom: 1rem;"></i>
+        <p>Loading medical directory...</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h3 class="logo"><i class="fa-solid fa-compass-drafting"></i> NEXORA</h3>
+        <p>Providing guidance, hospital coordination, and treatment planning support for cosmetic, general surgical, orthopedic, and dental procedures.</p>
+        <div class="social-links">
+          <a href="#" class="social-icon"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" class="social-icon"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" class="social-icon"><i class="fa-brands fa-whatsapp"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h3>Services</h3>
+        <ul class="footer-links">
+          <li><a href="/doctors.html">Aesthetic Care</a></li>
+          <li><a href="/doctors.html">General Surgeries</a></li>
+          <li><a href="/doctors.html">Joint & Spine Care</a></li>
+          <li><a href="/doctors.html">Dental Designs</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>Support</h3>
+        <ul class="footer-links">
+          <li><a href="/appointments.html">Book Slot</a></li>
+          <li><a href="/contact.html">Lead Enquiry</a></li>
+          <li><a href="#" id="staff-link">Staff Access</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>Contact Info</h3>
+        <p><i class="fa-solid fa-location-dot text-accent"></i> 12/A Hospital Ave, Medical District</p>
+        <p><i class="fa-solid fa-phone text-accent"></i> +1 555-010-0100</p>
+        <p><i class="fa-solid fa-envelope text-accent"></i> contact@nexorahealth.com</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2026 Nexora Health. All rights reserved. Professional Coordination Services.
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script type="module">
+    import { api } from '/js/api.js';
+    import { checkSession, updateNavAuthLinks, openLoginModal } from '/js/auth.js';
+
+    document.addEventListener('DOMContentLoaded', async () => {
+      // Toggle Mobile Menu
+      const toggleBtn = document.getElementById('menu-toggle-btn');
+      const navbar = document.getElementById('navbar');
+      toggleBtn.addEventListener('click', () => {
+        navbar.classList.toggle('active');
+      });
+
+      // Update Nav Dynamic Links
+      const user = await checkSession();
+      updateNavAuthLinks(user);
+
+      // Support footer staff link
+      document.getElementById('staff-link').addEventListener('click', (e) => {
+        e.preventDefault();
+        if (user) {
+          window.location.href = '/dashboard.html';
+        } else {
+          openLoginModal();
+        }
+      });
+
+      // Fetch and render doctors list
+      let allDoctors = [];
+      const container = document.getElementById('doctors-container');
+
+      const renderDoctors = (list) => {
+        container.innerHTML = '';
+        if (list.length === 0) {
+          container.innerHTML = `
+            <div style="grid-column: 1/-1; text-align: center; color: var(--text-secondary); padding: 4rem 0;">
+              <i class="fa-solid fa-user-slash" style="font-size: 3rem; margin-bottom: 1rem; color: var(--text-muted);"></i>
+              <p>No doctors found matching the query. Please adjust your criteria.</p>
+            </div>
+          `;
+          return;
+        }
+
+        list.forEach((doc) => {
+          // Format schedules representation
+          let scheduleHtml = '';
+          if (doc.schedule && doc.schedule.length > 0) {
+            doc.schedule.forEach(slot => {
+              scheduleHtml += `
+                <div class="schedule-day">
+                  <span>${slot.day}</span>
+                  <span>${slot.start} - ${slot.end} (UTC)</span>
+                </div>
+              `;
+            });
+          } else {
+            scheduleHtml = '<div style="color:var(--text-muted)">Availability rules pending</div>';
+          }
+
+          // Format WhatsApp click link
+          const waPrefilled = `https://wa.me/${doc.phone.replace(/[^\d]/g, '')}?text=Hello%20Dr.%20${encodeURIComponent(doc.name)},%20I%20would%20like%20to%20consult%20regarding%20my%20Nexora%20Care%20appointment.`;
+
+          container.innerHTML += `
+            <div class="doctor-card">
+              <div class="doctor-photo-container">
+                <img src="${doc.profilePhoto}" alt="${doc.name}" class="doctor-photo">
+                <span class="specialty-tag">${doc.specialty}</span>
+              </div>
+              <div class="doctor-info">
+                <h3>${doc.name}</h3>
+                <div class="doctor-degrees">${doc.degrees}</div>
+                
+                <div class="doctor-schedule-box">
+                  <h4>Consulting Hours</h4>
+                  ${scheduleHtml}
+                </div>
+                
+                <div class="doctor-actions">
+                  <a href="/appointments.html?doctor=${doc._id}" class="btn btn-primary"><i class="fa-solid fa-calendar-days"></i> Book</a>
+                  <a href="${waPrefilled}" target="_blank" class="btn btn-secondary" style="background:#25D366; color:white; border-color:#25D366;">
+                    <i class="fa-brands fa-whatsapp"></i> Chat
+                  </a>
+                </div>
+              </div>
+            </div>
+          `;
+        });
+      };
+
+      try {
+        allDoctors = await api.get('/api/doctors');
+        renderDoctors(allDoctors);
+      } catch (err) {
+        container.innerHTML = `
+          <div style="grid-column: 1/-1; text-align: center; color: var(--error); padding: 4rem 0;">
+            <i class="fa-solid fa-triangle-exclamation" style="font-size: 3rem; margin-bottom: 1rem;"></i>
+            <p>Failed to load doctors database listing. Please try again later.</p>
+          </div>
+        `;
+      }
+
+      // Filter handling
+      const searchInput = document.getElementById('search-doctor');
+      const specialtySelect = document.getElementById('filter-specialty');
+
+      const applyFilters = () => {
+        const query = searchInput.value.toLowerCase();
+        const spec = specialtySelect.value;
+
+        const filtered = allDoctors.filter(doc => {
+          const matchesSearch = doc.name.toLowerCase().includes(query);
+          const matchesSpecialty = spec === '' || doc.specialty === spec;
+          return matchesSearch && matchesSpecialty;
+        });
+
+        renderDoctors(filtered);
+      };
+
+      searchInput.addEventListener('input', applyFilters);
+      specialtySelect.addEventListener('change', applyFilters);
+    });
+  </script>
+</body>
+</html>
